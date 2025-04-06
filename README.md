@@ -1,4 +1,4 @@
-# Go Markdown Web Server
+# Go Markdown Blog Web Server
 
 This project is a simple web server written in Go that serves markdown files. It's designed as a learning experience for myself to explore Go's capabilities, particularly in web development and file system interaction. I've also made it publicly available to showcase my work and provide a useful tool for others.
 
@@ -25,8 +25,8 @@ You can use this project in two ways: by downloading a pre-built executable or b
     * Open your terminal or command prompt.
     * Navigate to the directory where you downloaded the executable.
     * Run the executable:
-        * macOS/Linux: `./go-markdown-server`
-        * Windows: `go-markdown-server.exe`
+        * macOS/Linux: `./self-hosted-blog`
+        * Windows: `self-hosted-blog`
 
 4.  **Access the Server:**
     * Open your web browser and go to `http://localhost:8080`.
