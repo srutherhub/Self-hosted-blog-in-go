@@ -1,0 +1,14 @@
+{{define "sidebar"}}
+<nav class="">
+  {{range .}} {{range $dir, $pages := .}} {{if ne $dir "."}}
+  <details open>
+    <summary>{{$dir}}</summary>
+    <ul>
+      {{range $num, $page := $pages}}
+      <li><a href="/{{$page.GetUrl}}">{{$page.GetName}}</a></li>
+      {{end}}
+    </ul>
+  </details>
+  {{end}} {{end}} {{end}}
+</nav>
+{{end}}
