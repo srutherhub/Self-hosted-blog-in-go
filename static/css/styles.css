@@ -15,6 +15,7 @@ body {
   display: grid;
   grid-template-columns: 16rem 1fr 16rem;
   padding: 1rem;
+  row-gap: 4rem;
 }
 
 ul {
@@ -43,7 +44,20 @@ nav {
 
 .std-container {
   box-shadow: var(--shadow) 0px 2px 8px 0px;
-  border: 1px var(--border) solid;
   border-radius: 1rem;
   padding: 1rem;
+}
+
+.navbar {
+  grid-column: span 3;
+}
+
+@media only screen and (max-width: 1200px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  article {
+    justify-self: center;
+  }
 }
