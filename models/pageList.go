@@ -17,7 +17,7 @@ func GetFilePaths() []map[string][]TPage {
 		page.addPath(splitFilePath(filepath.Dir(path)))
 		page.addIsFolder(info.IsDir())
 		page.getFileData(page.GetName(), page.GetPath())
-		page.addUrl(page.GetPath(), page.GetName())
+		page.addUrl(page.GetPath(), page.GetNameNoExt())
 		page.GetNameNoExt()
 		if info.IsDir() {
 			if _, ok := output[page.GetName()]; !ok {
