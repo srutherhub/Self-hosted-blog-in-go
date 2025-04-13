@@ -1,11 +1,11 @@
 {{define "sidebar"}}
 <nav class="std-container">
   {{range .}} {{range $dir, $pages := .}} {{if ne $dir "."}}
-  <h4>{{$dir}}</h4>
+  <h4><a href="/{{$dir}}">{{$dir}}</a></h4>
   <ul>
-    {{range $num, $page := $pages}}
-    <li><a href="/{{$page.GetUrl}}">{{$page.GetName}}</a></li>
-    {{end}}
+    {{range $num, $page := $pages}} {{if ne $page.GetNameNoExt $dir}}
+    <li><a href="/{{$page.GetUrl}}">{{$page.GetNameNoExt}}</a></li>
+    {{end}} {{end}}
   </ul>
   {{end}} {{end}} {{end}}
 </nav>

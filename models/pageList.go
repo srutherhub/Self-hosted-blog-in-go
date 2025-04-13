@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func GetFilePaths() map[string][]TPage {
+func GetFilePaths() []map[string][]TPage {
 	output := make(map[string][]TPage)
 	root := filepath.Join("home")
 	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
@@ -18,9 +18,11 @@ func GetFilePaths() map[string][]TPage {
 		page.addIsFolder(info.IsDir())
 		page.getFileData(page.GetName(), page.GetPath())
 		page.addUrl(page.GetPath(), page.GetName())
+		page.GetNameNoExt()
 		if info.IsDir() {
 			if _, ok := output[page.GetName()]; !ok {
 				output[page.GetName()] = []TPage{}
+				output[page.GetName()] = append(output[page.GetName()], page)
 			}
 		} else {
 			lastDir := page.GetPath()[len(page.GetPath())-1]
@@ -29,7 +31,7 @@ func GetFilePaths() map[string][]TPage {
 		return err
 	})
 	utils.Check(err)
-	return output
+	return sortPageList(output)
 }
 
 // @type TPage
@@ -69,6 +71,12 @@ func (inst *TPage) IsDir() bool {
 // @method
 func (inst *TPage) GetData() []byte {
 	return inst.data
+}
+
+// @method
+func (inst *TPage) GetNameNoExt() string {
+	ext := filepath.Ext(inst.name)
+	return inst.name[:len(inst.name)-len(ext)]
 }
 
 // @method
@@ -114,4 +122,20 @@ func readFile(name string, path []string) []byte {
 		return utils.MdToHTML(data)
 	}
 
+}
+
+func sortPageList(pagelist map[string][]TPage) []map[string][]TPage {
+	output := make([]map[string][]TPage, 0)
+
+	for key, item := range pagelist {
+		elem := map[string][]TPage{key: item}
+		if key == "home" {
+			c := make([]map[string][]TPage, 0)
+			c = append(c, elem)
+			output = append(output, c...)
+		} else {
+			output = append(output, elem)
+		}
+	}
+	return output
 }
